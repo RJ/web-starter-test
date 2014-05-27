@@ -1,0 +1,26 @@
+{
+  "name": "irccloud",
+  "version": "0.0.1",
+  "description": "IRCCloud web frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"no tests\""
+  },
+  "author": "IRCCloud Ltd.",
+  "license": "PRIVATE",
+  "dependencies": {
+    "react": "~0.10.0",
+    "browserify": "~4.1.5",
+    "glob": "4.0.0",
+    "gulp": "~3.6.2",
+    "gulp-concat": "~2.2.0",
+    "gulp-react": "~0.3.3",
+    "gulp-browserify": "~0.5.0",
+    "express": "^4.3.1",
+    "gulp-plumber": "^0.6.2",
+    "gulp-flatten": "0.0.2",
+    "jquery": "^2.1.1",
+    "underscore": "^1.6.0",
+    "backbone": "^1.1.2"
+  }
+}
