@@ -16,7 +16,7 @@ var Skeleton = React.createClass({
             this.props.names,
             function (n) {
                 return <Hello key={n} name={n} />;
-        });
+        })
     }
 });
 

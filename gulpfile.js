@@ -5,7 +5,17 @@ var react           = require("gulp-react");
 var concat          = require("gulp-concat");
 var plumber         = require("gulp-plumber");
 var flatten         = require("gulp-flatten");
+var sass            = require("gulp-sass");
+var minifyCSS       = require("gulp-minify-css");
+var gutil           = require('gulp-util');
+var gulpif          = require('gulp-if');
+var rename          = require("gulp-rename");
+var uglify          = require("gulp-uglify");
 
+
+var production = process.env.PRODUCTION != '1';
+if (production) console.log("Gulping in DEV mode");
+else            console.log("Gulping in PRODUCTION mode");
 //
 
 //vendorJs = glob.sync('./vendor/js/*.js').sort(jsDepSorter);
@@ -25,6 +35,14 @@ gulp.task('js', function() {
         .pipe(gulp.dest('build/'));
 });
 
+gulp.task('scss', function() {
+    return gulp.src(['scss/*.css', 'scss/*.scss'])
+        .pipe(sass())
+        .pipe(gulpif(production, minifyCSS({keepBreaks:true})))
+        .pipe(concat('style.css'))
+        .pipe(gulp.dest('build/'));
+});
+
 // Browserify everyrthing into a bundle
 gulp.task('build', ['js'], function(){
     var stream = gulp.src(['build/app.js'])
@@ -36,7 +54,7 @@ gulp.task('build', ['js'], function(){
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('./build'));
 
-    if (false) {
+    if (production) {
         stream = stream
             .pipe(rename('bundle.min.js'))
             .pipe(uglify())
@@ -46,9 +64,12 @@ gulp.task('build', ['js'], function(){
     return stream;
 });
 
-gulp.task('watch', ['build'], function() {
+gulp.task('watch', ['build','scss'], function() {
   gulp.watch(['src/*.js', 'src/**/*.js'],[
     'build'
+  ]);
+  gulp.watch(['scss/*'],[
+    'scss'
   ]);
 });
 

@@ -1,7 +1,13 @@
+$ourcolor: darkgreen;
+
 /* Top level container for top level react component to render into */
 div.react {
     border:0;
     margin:0;
+}
+
+h1 {
+    color: $ourcolor;
 }
 
 
